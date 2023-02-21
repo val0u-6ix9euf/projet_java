@@ -8,19 +8,19 @@ public class utilisateur extends personne
         this.nom = nom;
     }
 
-    public String getlogin() {
+    public String getLogin() {
         return login;
     }
 
-    public void setlogin(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    public String getlogin() {
+    public String getMotpasse() {
         return motpasse;
     }
 
-    public void setmotpasse(String motpasse) {
+    public void setMotpasse(String motpasse) {
         this.motpasse = motpasse;
     }
  
