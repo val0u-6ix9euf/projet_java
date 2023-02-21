@@ -1,4 +1,4 @@
-public class utilisateur extends personne
+public class utilisateur extends personne {
     
     private String login;
     private String motpasse;
