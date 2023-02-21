@@ -1,14 +1,15 @@
-public class abonne extend utilisateur{
+public class abonne extends utilisateur {
+    
     private int numero; 
     private String adresse;
     private Date dateabonnement;
     private Date datesuspendu;
     
-    public abonne (int numero, String adresse, Date dateabonnement, Date datesuspendu){
-    this.numero=numero; 
-    this.adresse=adresse;
-    this.dateabonnement=dateabonnement;
-    this.datesuspendu=datesuspendu;
+    public abonne (int numero, String adresse, Date dateabonnement, Date datesuspendu) {
+    this.numero = numero; 
+    this.adresse = adresse;
+    this.dateabonnement = dateabonnement;
+    this.datesuspendu = datesuspendu;
     }
 
      public int getNumero() {
