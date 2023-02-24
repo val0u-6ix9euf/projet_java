@@ -1,11 +1,13 @@
 public class utilisateur extends personne {
     
     private String login;
-    private String motpasse;
+    private String mdp;
+    private String typedecompte;
     
-    public utilisateur (String nom, String prenom, String login, String motpasse) {
+    public utilisateur (String login, String mdp, String typedecompte) {
         this.login = login;
-        this.nom = nom;
+        this.mdp = mdp;
+        this.typedecompte=typedecompte;
     }
 
     public String getLogin() {
@@ -16,12 +18,21 @@ public class utilisateur extends personne {
         this.login = login;
     }
 
-    public String getMotpasse() {
-        return motpasse;
+    public String getMdp() {
+        return mdp;
+    }
+     public void setMdp(String mdp) {
+        this.mdp = mdp;
     }
 
-    public void setMotpasse(String motpasse) {
-        this.motpasse = motpasse;
+    public void setTypedecompte(String Typedecompte) {
+        this.typedecompte = typedecompte
     }
- 
+ public String getTypedecompte() {
+        return typedecompte;
+    }
+
+   
 }
+
+FAIRE TABLEAU AVEC LES LOGIN ET LES MDP de type utilisateur
