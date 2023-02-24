@@ -1,10 +1,11 @@
+personne
 public class personne {
 private String nom;
 private String prenom;
 
 public personne (String nom, String prenom)
-{nom = nom
-prenom = prenom}
+{this.nom = nom
+this.prenom = prenom}
 }
 
 public String getNom(){
