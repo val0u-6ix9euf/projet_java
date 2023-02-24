@@ -4,9 +4,9 @@ public class pret {
     private Date dateretour;
 
 public pret (int numpret, Date dateemprunt, Date dateretour)
-{numpret = numpret;
-dateemprunt= dateemprunt;
-dateretour=dateretour;}
+{this.numpret = numpret;                                            // rajouter this
+this.dateemprunt= dateemprunt;
+this.dateretour=dateretour;}
 }
 
 public int getNumpret(){
