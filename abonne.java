@@ -1,3 +1,7 @@
+package projetjava;
+
+import java.util.Date;
+
 public class abonne extends utilisateur {
     
     private int numero; 
@@ -5,12 +9,17 @@ public class abonne extends utilisateur {
     private Date dateabonnement;
     private Date datesuspendu;
     
-    public abonne (int numero, String adresse, Date dateabonnement, Date datesuspendu) {
-    this.numero = numero; 
-    this.adresse = adresse;
-    this.dateabonnement = dateabonnement;
-    this.datesuspendu = datesuspendu;
+    
+    public abonne (String nom, String prenom, String login, String mdp, int numero, String adresse, Date dateabonnement, Date datesuspendu) { 
+        super (login, mdp, nom, prenom); // il faut mettre ceux de personne aussi 
+        this.numero = numero; 
+        this.adresse = adresse;
+        this.dateabonnement = dateabonnement;
+        this.datesuspendu = datesuspendu;
     }
+    
+   
+    
 
      public int getNumero() {
         return numero;
@@ -32,15 +41,17 @@ public class abonne extends utilisateur {
         return dateabonnement;
     }
 
-    public void setDateabonnement (String dateabonnement) {
+    public void setDateabonnement (Date dateabonnement) {
         this.dateabonnement = dateabonnement;
     }
 
-           public Date getDatesuspebndu() {
+           public Date getDatesuspendu() {
         return datesuspendu;
     }
 
-    public void setDatesuspendu (String datesuspendu) {
+    public void setDatesuspendu (Date datesuspendu) {
         this.datesuspendu = datesuspendu;
     }
 }
+    
+
