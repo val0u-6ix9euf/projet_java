@@ -1,11 +1,13 @@
-personne
+package projetjava;
+
 public class personne {
 private String nom;
 private String prenom;
 
 public personne (String nom, String prenom)
-{this.nom = nom
-this.prenom = prenom}
+{this.nom = nom;
+this.prenom = prenom;
+       
 }
 
 public String getNom(){
@@ -19,3 +21,5 @@ return prenom;}
 
 public void setPrenom (String prenom){
     this.prenom = prenom ;}
+
+}
