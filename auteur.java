@@ -1,11 +1,14 @@
+package projetjava;
+
 public class auteur extends personne {
     
     private int numero; 
     private String nationalite;
 
     public auteur (String nom, String prenom, int numero, String nationalite) {
-    this.numero = numero; 
-    this.nationalite = nationalite;
+        super(nom, prenom);
+        this.numero = numero; 
+        this.nationalite = nationalite;
     }
 
      public int getNumero() {
