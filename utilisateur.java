@@ -1,13 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package projetjava;
+
+
 public class utilisateur extends personne {
     
     private String login;
     private String mdp;
-    private String typedecompte;
+   
     
-    public utilisateur (String login, String mdp, String typedecompte) {
+    public utilisateur (String nom, String prenom, String login, String mdp) {
+        super(nom, prenom);
         this.login = login;
         this.mdp = mdp;
-        this.typedecompte=typedecompte;
     }
 
     public String getLogin() {
@@ -24,15 +31,4 @@ public class utilisateur extends personne {
      public void setMdp(String mdp) {
         this.mdp = mdp;
     }
-
-    public void setTypedecompte(String Typedecompte) {
-        this.typedecompte = typedecompte
-    }
- public String getTypedecompte() {
-        return typedecompte;
-    }
-
-   
 }
-
-FAIRE TABLEAU AVEC LES LOGIN ET LES MDP de type utilisateur
