@@ -1,11 +1,11 @@
-package gestion.java;
+package projetjava;
 
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class clavier {
+public class Clavier {
 
     public static int toInt(String s) {
         int result = 0;
