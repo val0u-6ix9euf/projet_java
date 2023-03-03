@@ -12,55 +12,71 @@ public class Gestion {
     private static ArrayList<Admin> listeAdmins = new ArrayList<>();
 
     
-public static void main(String[] args) 
+public static void main(String[] args)
 {
-    Utilisateur utilisateur = null;
-    while (utilisateur == null) // boucle pour gérer les erreurs d'authentification
-       {  utilisateur = authentif();
-        if (utilisateur == null) 
-        {
-            System.out.println("Authentification échouée. Veuillez réessayer.");
+     Utilisateur utilisateur = authentif();
+          if (utilisateur != null) {
+            // afficher le menu correspondant au type d'utilisateur
+            if (utilisateur instanceof Abonne) {
+                menuAbonne((Abonne) utilisateur);
+            } else if (utilisateur instanceof Bibliothecaire) {
+               menuBibliothecaire((Bibliothecaire) utilisateur);
+            } else if (utilisateur instanceof Admin) {
+                menuAdmin((Admin)utilisateur) ;
+            }
         }
     }
-
-    Gestion gestion = new Gestion();
-    if (utilisateur instanceof Abonne) 
-    {
-        gestion.menuAbonne((Abonne) utilisateur);
-    } else if (utilisateur instanceof Bibliothecaire) 
-    {
-        gestion.menuBibliothecaire((Bibliothecaire) utilisateur);
-    } else if (utilisateur instanceof Admin) 
-    {
-        gestion.menuAdmin((Admin) utilisateur);
-    }
-}
-
-private static Utilisateur authentif() {
+private static Utilisateur authentif() 
+{
     System.out.println("Veuillez vous connecter.");
     System.out.println("Entrez votre login : ");
     String login = Clavier.lireString();
     System.out.println("Entrez votre mot de passe : ");
     String mdp = Clavier.lireString();
-    for (Abonne abonne : listeAbonnes) {
-        if (abonne.getLogin().equals(login) && abonne.getMdp().equals(mdp)) {
-            return abonne;
+    
+        // Authentifier l'utilisateur
+        Utilisateur u = null;
+        for (Abonne abonne : listeAbonnes) 
+        {
+            if (abonne.getLogin().equals(login) && abonne.getMdp().equals(mdp)) 
+            {
+                System.out.println("Authentification réussie en tant qu'abonné.");
+                u = abonne;
+                break;
+            }
         }
-    }
-    for (Bibliothecaire bibliothecaire : listeBibliothecaires) {
-        if (bibliothecaire.getLogin().equals(login) && bibliothecaire.getMdp().equals(mdp)) {
-            return bibliothecaire;
+        if (u == null) 
+        {
+            for (Bibliothecaire bibliothecaire : listeBibliothecaires) 
+            {
+                if (bibliothecaire.getLogin().equals(login) && bibliothecaire.getMdp().equals(mdp)) 
+                {
+                    System.out.println("Authentification réussie en tant que bibliothécaire.");
+                    u = bibliothecaire;
+                    break;
+                }
+            }
         }
-    }
-    for (Admin admin : listeAdmins) {
-        if (admin.getLogin().equals(login) && admin.getMdp().equals(mdp)) {
-            return admin;
+        if (u == null) 
+        {
+          for (Admin admin : listeAdmins)
+          {
+            if (admin.getLogin().equals(login) && admin.getMdp().equals(mdp)) 
+            {
+                    System.out.println("Authentification réussie en tant qu'Admin.");
+                    u = admin;
+                    break;
+            }
+          }
         }
+        if (u == null) 
+        {
+            System.out.println("Identifiants invalides.");
+        }
+        return u;
     }
-    System.out.println("Authentification échouée");
-    return null; // si l'authentification a échoué, on renvoie null pour demander à l'utilisateur de réessayer
-}
         
+       
     // menu abonné
     private static void menuAbonne(Abonne abonne) 
     {
