@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package projetjava;
 
-public class ouvrage {
+public class Ouvrage {
 
 private int numouvrage;
 private String titre;
@@ -13,13 +9,43 @@ private String resume;
 private String disponibilite;
 
 
-public ouvrage (int numouvrage, String titre, String editeur, String resume, String disponibilite)
-{  numouvrage=numouvrage;
-    titre = titre;
-    editeur = editeur;
-    resume = resume;
-    disponibilite = disponibilite; }
+public Ouvrage (int numouvrage, String titre, String editeur, String resume, String disponibilite)
+{  this.numouvrage=numouvrage;
+    this.titre = titre;
+    this.editeur = editeur;
+    this.resume = resume;
+    this.disponibilite = disponibilite; 
+}
 
-// rajouter get et set
+public int getNumouvrage(){
+return numouvrage;}
+
+public void setNom (int numouvrage){
+this.numouvrage = numouvrage ;}
+
+public String getTitre(){
+return titre;}
+
+public void setTitre (String titre){
+    this.titre = titre ;}
+
+public String getEditeur(){
+return editeur;}
+
+public void setEditeur (String Editeur){
+    this.editeur = editeur ;}
+
+public String getResume(){
+return resume;}
+
+public void setResume (String Resume){
+    this.resume = resume ;}
+
+public String getDisponibilite(){
+return disponibilite;}
+
+public void setDisponibilite (String disponibilite){
+    this.disponibilite = disponibilite ;}
+
 
 }
