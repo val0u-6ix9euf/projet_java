@@ -1,13 +1,22 @@
 package projetjava;
 
-public class Bibliothecaire extends Utilisateur {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bibliothecaire extends Utilisateur 
+{
     private int numero; 
     private String specialite;
 
     public Bibliothecaire (String nom, String prenom, String login, String mdp, int numero, String specialite){
-        super (login, mdp, nom, prenom);
+        super (nom, prenom, login, mdp);
         this.numero=numero; 
         this.specialite=specialite;
+    }
+    
+        public static List<Bibliothecaire> getListeBibliothecaires() 
+    {
+        return listeBibliothecaires;
     }
 
      public int getNumero() {
@@ -22,7 +31,16 @@ public class Bibliothecaire extends Utilisateur {
         return specialite;
     }
 
-    public void setSpecialite (String specialite) {
+    public void setSpecialite (String specialite) 
+    {
         this.specialite = specialite;
     }
+    
+     private static List<Bibliothecaire> listeBibliothecaires = new ArrayList<>();
+     
+     static 
+     {
+        Bibliothecaire bibliothecaire1 = new Bibliothecaire("Partouche", "Terence", "t.partouche", "terence", 1, "romans");
+        listeBibliothecaires.add(bibliothecaire1);
+     }
 }
