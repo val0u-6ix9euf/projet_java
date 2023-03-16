@@ -2,80 +2,92 @@ package projetjava;
 import java.util.Date;
 import java.util.ArrayList;
 
-/* Faire les listes de bibliothécaire, auteur, admin (abonné ok la liste mais ptet faut faire un tableau)
-résoudre le pb de quand on lance on ne peut pas rentrer dans les menus, on se connecte a l'infini
-le mieux c'est une liste ou un tableau pour stocker les infos? 
+/*  il reste a faire : 
+abonné : toutes les méthodes
+bibliothecaire : méthodes creerPret, retournerOuvrage, rechercherPretEnCours, rechercherPretparNumero, compterPret
+admin : tout est ok
 */
+
+
 public class Gestion {
     private static ArrayList<Abonne> listeAbonnes = new ArrayList<>();
     private static ArrayList<Bibliothecaire> listeBibliothecaires = new ArrayList<>();
-    private static ArrayList<Admin> listeAdmins = new ArrayList<>();
+    private static ArrayList<Admin> listeAdmins = new ArrayList<>();    
+    private static ArrayList<Auteur> listeAuteurs = new ArrayList<>();
+    private static ArrayList<Ouvrage> listeOuvrages = new ArrayList<>();
+    private static ArrayList<Pret> listePrets = new ArrayList<>();
 
     
-public static void main(String[] args)
+    public static void main(String[] args)
 {
      Utilisateur utilisateur = authentif();
           if (utilisateur != null) {
             // afficher le menu correspondant au type d'utilisateur
-            if (utilisateur instanceof Abonne) {
+            if (utilisateur instanceof Abonne) 
+            {
                 menuAbonne((Abonne) utilisateur);
-            } else if (utilisateur instanceof Bibliothecaire) {
+            }
+                else if (utilisateur instanceof Bibliothecaire) 
+            {
                menuBibliothecaire((Bibliothecaire) utilisateur);
-            } else if (utilisateur instanceof Admin) {
+            }
+                else if (utilisateur instanceof Admin) 
+            {
                 menuAdmin((Admin)utilisateur) ;
             }
         }
     }
-private static Utilisateur authentif() 
-{
+    
+private static Utilisateur authentif() {
+    String login;
+    String mdp;
+
     System.out.println("Veuillez vous connecter.");
     System.out.println("Entrez votre login : ");
-    String login = Clavier.lireString();
+    login = Clavier.lireString();
     System.out.println("Entrez votre mot de passe : ");
-    String mdp = Clavier.lireString();
-    
-        // Authentifier l'utilisateur
-        Utilisateur u = null;
-        for (Abonne abonne : listeAbonnes) 
+    mdp = Clavier.lireString();
+
+    // Authentifier l'utilisateur
+    Utilisateur u = null;
+    for (Abonne abonne : Abonne.getListeAbonnes()) 
+    {
+        if (abonne.getLogin().equals(login) && abonne.getMdp().equals(mdp)) 
         {
-            if (abonne.getLogin().equals(login) && abonne.getMdp().equals(mdp)) 
-            {
-                System.out.println("Authentification réussie en tant qu'abonné.");
-                u = abonne;
+            System.out.println("Authentification réussie ");
+            u = abonne;
+            break;
+        }
+    }
+    if (u == null) 
+    {
+        for (Bibliothecaire bibliothecaire : Bibliothecaire.getListeBibliothecaires())
+        {
+            if (bibliothecaire.getLogin().equals(login) && bibliothecaire.getMdp().equals(mdp)) {
+                System.out.println("Authentification réussie");
+                u = bibliothecaire;
                 break;
             }
         }
-        if (u == null) 
+    }
+    if (u == null) 
+    {
+        for (Admin admin : Admin.getListeAdmins())
         {
-            for (Bibliothecaire bibliothecaire : listeBibliothecaires) 
-            {
-                if (bibliothecaire.getLogin().equals(login) && bibliothecaire.getMdp().equals(mdp)) 
-                {
-                    System.out.println("Authentification réussie en tant que bibliothécaire.");
-                    u = bibliothecaire;
-                    break;
-                }
-            }
-        }
-        if (u == null) 
-        {
-          for (Admin admin : listeAdmins)
-          {
             if (admin.getLogin().equals(login) && admin.getMdp().equals(mdp)) 
             {
-                    System.out.println("Authentification réussie en tant qu'Admin.");
-                    u = admin;
-                    break;
+                System.out.println("Authentification réussie");
+                u = admin;
+                break;
             }
-          }
         }
-        if (u == null) 
-        {
-            System.out.println("Identifiants invalides.");
-        }
-        return u;
     }
-        
+    if (u == null) 
+    {
+        System.out.println("Identifiants invalides.");
+    }
+    return u;
+}    
        
     // menu abonné
     private static void menuAbonne(Abonne abonne) 
@@ -195,9 +207,9 @@ public static void creerAuteur()
         int numero = Clavier.lireInt();
         System.out.println("Nationalité :");
         String nationalite = Clavier.lireString();
-        Auteur auteur = new Auteur(nom, prenom, numero, nationalite);
+       listeAuteurs.add ( new Auteur(nom, prenom, numero, nationalite));
         // Enregistrement de l'auteur dans la base de données ou dans une liste d'auteurs
-        System.out.println("Nouvel auteur créé : " + auteur);
+        System.out.println("Nouvel auteur créé avec succès !");
     }
 
 
@@ -216,9 +228,8 @@ public static void creerOuvrage()
       System.out.print("Disponibilité : ");
       String disponibilite = Clavier.lireString();
       
-      Ouvrage ouvrage = new Ouvrage(numouvrage, titre, editeur, resume, disponibilite);
+      listeOuvrages.add( new Ouvrage (numouvrage, titre, editeur, resume, disponibilite));
       System.out.println("Ouvrage créé avec succès !");
-    // Ajout de l'ouvrage à la liste des ouvrages
 }
  
 public static void creerAbonne() 
@@ -240,7 +251,7 @@ public static void creerAbonne()
     System.out.println("Veuillez entrer le mot de passe de l'abonné :");
     String mdp = Clavier.lireString();
 
-    Abonne abonne = new Abonne(nom, prenom, login, mdp, numero, adresse, dateAbonnement, dateSuspendu);
+   listeAbonnes.add(new Abonne(nom, prenom, login, mdp, numero, adresse, dateAbonnement, dateSuspendu));
        // Ajouter l'abonné à une liste ou un tableau d'abonnés si nécessaire
     System.out.println("Abonné créé avec succès !");
 }
@@ -254,9 +265,8 @@ public static void creerPret()
         Date dateemprunt = Clavier.lireDate();
         System.out.println("Entrez la date de retour prévue (jj/mm/aaaa) :");
         Date dateretour = Clavier.lireDate();
-        Pret pret = new Pret(numpret, dateemprunt, dateretour);
-        // Ajouter le prêt à une liste ou une base de données
- 
+        listePrets.add (new Pret(numpret, dateemprunt, dateretour));
+        System.out.println("Prêt créé avec succès !"); 
 }
 
 // méthodes à créer pour le menu bibliothécaire
@@ -265,9 +275,38 @@ public static void retournerOuvrage()
 
 public static void rechercherPretEnCours()
 {}
+public static void rechercherAbonneParNumero() 
+{
+    System.out.println("Entrez le numéro de l'abonné à rechercher : ");
+    int numero = Clavier.lireInt();
 
-public static void rechercherAbonneParNumero()       
-{}
+    boolean abonneTrouve = false;
+    
+    for (Abonne abonne : Abonne.getListeAbonnes())
+    {
+        if (abonne.getNumero() == numero)
+        {
+            System.out.println("Abonné trouvé :");
+            System.out.println("Nom : " + abonne.getNom());
+            System.out.println("Prénom : " + abonne.getPrenom());
+            System.out.println("Login : " + abonne.getLogin());
+            System.out.println("Mot de passe : " + abonne.getMdp());
+            System.out.println("Numéro : " + abonne.getNumero());
+            System.out.println("Adresse : " + abonne.getAdresse());
+            System.out.println("Date d'abonnement : " + abonne.getDateabonnement());
+            System.out.println("Date de suspension : " + abonne.getDatesuspendu());
+
+            abonneTrouve = true;
+            break;
+        }
+    }
+
+    if (!abonneTrouve) 
+    {
+        System.out.println("Aucun abonné trouvé avec ce numéro.");
+    }
+} 
+
 
 public static void rechercherPretParNumero()
 {}
@@ -277,13 +316,35 @@ public static void compterPrets()
 
 //méthode pour le menu admin
 public static void creerBibliothecaire()
-{}
+{
+        System.out.println("Création d'un nouveau bibliothecaire");
+        System.out.println("Veuillez saisir les informations suivantes :");
+        System.out.println("login :");
+        String login = Clavier.lireString();
+        System.out.println("mdp :");
+        String mdp = Clavier.lireString();
+        System.out.println("Nom :");
+        String nom = Clavier.lireString();
+        System.out.println("Prenom :");
+        String prenom = Clavier.lireString();
+        System.out.println("Numéro :");
+        int numero = Clavier.lireInt();
+        System.out.println("Spécialité :");
+        String specialite = Clavier.lireString();
+        listeBibliothecaires.add(new Bibliothecaire(login, mdp, nom, prenom, numero, specialite));
+        // Enregistrement de l'auteur dans la base de données ou dans une liste d'auteurs
+        System.out.println("Nouveau bibliothécaire créer avec succès ! ");
+
+}
 
 //méthodes pour le menu abonné
 public static void consulterPret()
-{}
+{
+}
 public static void modifMdp()
-{}       
+{
+    
+}       
 public static void rechercheOuvrageNT()
 {}  
 public static void rechercheOuvrageA()
@@ -292,4 +353,4 @@ public static void rechercheOuvrageA()
 }
 
 
-    
+  
