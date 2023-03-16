@@ -1,4 +1,6 @@
 package projetjava;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ouvrage {
 
@@ -16,6 +18,11 @@ public Ouvrage (int numouvrage, String titre, String editeur, String resume, Str
     this.resume = resume;
     this.disponibilite = disponibilite; 
 }
+
+    public static List<Ouvrage> getListeOuvrage() 
+    {
+        return listeOuvrages;
+    }
 
 public int getNumouvrage(){
 return numouvrage;}
@@ -44,8 +51,16 @@ public void setResume (String Resume){
 public String getDisponibilite(){
 return disponibilite;}
 
-public void setDisponibilite (String disponibilite){
-    this.disponibilite = disponibilite ;}
+public void setDisponibilite (String disponibilite)
+{
+    this.disponibilite = disponibilite ;
+}
 
+ private static List<Ouvrage> listeOuvrages = new ArrayList<>();
 
+    
+    static {
+       Ouvrage ouvrage1 = new Ouvrage(314, "l'odysée", "Hachette","blablablabla", "dispo");
+        listeOuvrages.add(ouvrage1);
+    }
 }
