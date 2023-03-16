@@ -1,6 +1,8 @@
 package projetjava;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pret 
 {
@@ -13,6 +15,11 @@ public class Pret
         this.numpret = numpret;
         this.dateemprunt = dateemprunt;
         this.dateretour = dateretour;
+    }
+
+      public static List<Pret> getListePrets() 
+    {
+        return listePrets;
     }
 
     public int getNumpret() 
@@ -41,5 +48,15 @@ public class Pret
     public void setDateretour(Date dateretour) 
     {
         this.dateretour = dateretour;
+    }
+    
+  private static List<Pret> listePrets = new ArrayList<>();
+
+    
+    static {
+        Date dateemprunt = new Date(2023, 3, 1);
+        Date dateretour = new Date(2023, 3, 16);
+        Pret pret1 = new Pret(1, dateemprunt, dateretour);
+        listePrets.add(pret1);
     }
 }
