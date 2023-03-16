@@ -15,11 +15,16 @@ public class Abonne extends Utilisateur
     
     public Abonne (String nom, String prenom, String login, String mdp, int numero, String adresse, Date dateabonnement, Date datesuspendu) 
     { 
-        super (login, mdp, nom, prenom);  
+        super (nom, prenom, login, mdp);  
         this.numero = numero; 
         this.adresse = adresse;
         this.dateabonnement = dateabonnement;
         this.datesuspendu = datesuspendu;
+    }
+    
+    public static List<Abonne> getListeAbonnes() 
+    {
+        return listeAbonnes;
     }
 
      public int getNumero() 
@@ -63,22 +68,24 @@ public class Abonne extends Utilisateur
     }
     
     // liste et tableau des abonnés
-     public static void main(String[] args) {
-        // Création de la liste d'abonnés
-        List<Abonne> listeAbonnes = new ArrayList<>();
+    private static List<Abonne> listeAbonnes = new ArrayList<>();
 
-        // Création des abonnés et ajout à la liste
+    // Bloc statique pour créer et ajouter des abonnés à la liste
+    static {
         Abonne abonne1 = new Abonne("Tabet", "Marie", "m.tabet", "1234", 1, "3 rue des Lilas", new Date(), null);
         listeAbonnes.add(abonne1);
 
-        Abonne abonne2 = new Abonne("Martin", "Valentine", "v.martin", "5678", 2, "5 avenue de la République", new Date(),null);
+        Abonne abonne2 = new Abonne("Martin", "Valentine", "v.martin", "5678", 2, "5 avenue de la République", new Date(), null);
         listeAbonnes.add(abonne2);
 
         Abonne abonne3 = new Abonne("Perrin", "Thomas", "t.perrin", "abcd", 3, "12 rue des Cerisiers", new Date(), null);
         listeAbonnes.add(abonne3);
+   
+
 
         // Affichage des informations sur tous les abonnés de la liste
-        for (Abonne abonne : listeAbonnes) {
+        for (Abonne abonne : listeAbonnes) 
+        {
             System.out.println("Nom : " + abonne.getNom());
             System.out.println("Prénom : " + abonne.getPrenom());
             System.out.println("Login : " + abonne.getLogin());
@@ -92,4 +99,3 @@ public class Abonne extends Utilisateur
 }
     
 
- 
