@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package projetjava;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Auteur extends Personne 
 {
@@ -15,6 +13,11 @@ public class Auteur extends Personne
         super(nom, prenom);
         this.numero = numero; 
         this.nationalite = nationalite;
+    }
+    
+      public static List<Auteur> getListeAuteurs() 
+    {
+        return listeAuteurs;
     }
 
      public int getNumero() {
@@ -36,4 +39,17 @@ public class Auteur extends Personne
         this.nationalite = nationalite;
     }
     
+   private static List<Auteur> listeAuteurs = new ArrayList<>();
+
+    
+    static 
+    {
+        Auteur auteur1 = new Auteur("Doe", "John", 1, "Américain");
+        Auteur auteur2 = new Auteur("Dupont", "Pierre", 2, "Français");
+        Auteur auteur3 = new Auteur("Müller", "Hans", 3, "Allemand");
+
+        listeAuteurs.add(auteur1);
+        listeAuteurs.add(auteur2);
+        listeAuteurs.add(auteur3);
+    }
 }
