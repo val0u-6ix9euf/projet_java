@@ -8,7 +8,7 @@ public class Personne
 
         public Personne (String nom, String prenom)
 {
-    this.nom = nom;
+this.nom = nom;
 this.prenom = prenom;
        
 }
