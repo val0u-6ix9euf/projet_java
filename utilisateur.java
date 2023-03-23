@@ -1,10 +1,14 @@
 package projetjava;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Utilisateur extends Personne {
-    
+
+    public class Utilisateur extends Personne {
+  
     private String login;
     private String mdp;
+    private static List<Utilisateur> listeUtilisateurs = new ArrayList<>();
   
     public Utilisateur (String nom, String prenom, String login, String mdp) 
     {
@@ -12,7 +16,12 @@ public class Utilisateur extends Personne {
         this.login = login;
         this.mdp = mdp;
     }
-
+    
+       public static List<Utilisateur> getListeUtilisateurs() 
+    {
+        return listeUtilisateurs;
+    }
+     
     public String getLogin() {
         return login;
     }
@@ -27,5 +36,4 @@ public class Utilisateur extends Personne {
      public void setMdp(String mdp) {
         this.mdp = mdp;
     }
-     
 }
