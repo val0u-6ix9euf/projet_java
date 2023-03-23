@@ -292,35 +292,28 @@ public static void retournerOuvrage()
 
 public static Pret rechercherPretEnCours()
 {
-    Pret p, trouve = null;
-    int numpret, i=0;
-    boolean rechercheParnumpret = false;
+    System.out.println("Entrez le numéro du prêt à rechercher : ");
+    int numero = Clavier.lireInt();
+
+    boolean pretTrouve = false;
     
-    System.out.println("Numero du prêt à rechercher : ");
-            numpret=Clavier.lireInt();
-            if (!listePrets.isEmpty()) { 
-                while ((i<listePrets.size()) && (trouve==null)){
-                    p = listePrets.get(i);
-                    if ((p.getNumpret()==numpret)){
-                          trouve = p;
-                    }
-                    i++;
-                 }
-           }
-    return trouve;
-}
-        
-public void afficherPretEnCours() {
-    Pret p; 
-    p = rechercherPretEnCours();
-    if (p != null) {
-        System.out.println("numpret: " + p.getNumpret()); 
-        System.out.println("dateemprunt: " + p.getDateemprunt());
-        System.out.println("dateretour: " + p.getDateretour());
-    } else {
-        System.out.println("Pret en cours non trouvé");
+    for (Pret pret : Pret.getListePrets())
+    {
+        if (pret.getNumpret() == numero && pret.getDateretour() == null)
+        {
+            System.out.println("Prêt en cours trouvé :");
+            System.out.println("Numpret : " + pret.getNumpret());
+            System.out.println("Date emprunt : " + pret.getDateemprunt());
+            System.out.println("Date retour : " + pret.getDateretour());
+   
+            return pret;
+        }
     }
+    
+    System.out.println("Aucun prêt en cours trouvé avec ce numéro.");
+    return null; 
 }
+
 public static void rechercherAbonneParNumero() 
 {
     System.out.println("Entrez le numéro de l'abonné à rechercher : ");
@@ -355,39 +348,28 @@ public static void rechercherAbonneParNumero()
 
 
 public static Pret rechercherPretParNumero()
-    {
-    Pret p, trouve = null;
-    int numpret, i=0;
-    
-    boolean rechercheParN = false;
-    
-    System.out.println("Numero du prêt à rechercher : ");
-            numpret=Clavier.lireInt();
-            if (!listePrets.isEmpty()) { 
-                while ((i<listePrets.size()) && (trouve==null)){
-                    p = listePrets.get(i);
-                    if ((p.getNumpret()==numpret)){
-                          trouve = p;
-                    }
-                    i++;
-                 }
-           }
-    return trouve;
-}
-    
-public void afficherPretParNumero() {
-    Pret p;
-    p = rechercherPretParNumero();
-    if (p != null) {
-        System.out.println("numpret: " + p.getNumpret()); 
-        System.out.println("dateemprunt: " + p.getDateemprunt());
-        System.out.println("dateretour: " + p.getDateretour());
-    } else
-        {
-        System.out.println("Pret en cours non trouvé");
-        }
-}
+{
+    System.out.println("Entrez le numéro du prêt à rechercher : ");
+    int numero = Clavier.lireInt();
 
+    boolean pretTrouve = false;
+    
+    for (Pret pret : Pret.getListePrets())
+    {
+        if (pret.getNumpret() == numero)
+        {
+            System.out.println("Prêt trouvé :");
+            System.out.println("Numpret : " + pret.getNumpret());
+            System.out.println("Date emprunt : " + pret.getDateemprunt());
+            System.out.println("Date retour : " + pret.getDateretour());
+   
+         return pret;
+        }
+    }
+            System.out.println("Aucun prêt trouvé avec ce numéro.");
+        return null; 
+}
+    
 public static int compterPrets() {
     int nbPrets = 0;
     for (Pret pret : listePrets) {
@@ -499,52 +481,26 @@ public static Ouvrage rechercheOuvrageNT()
            }
     return trouve;
 }
-    
-public void afficherOuvrageNT() {
-    Ouvrage o;
-    o = rechercheOuvrageNT();
-    if (o != null) {
-        System.out.println("numouvrage: " + o.getNumouvrage()); 
-        System.out.println("titre: " + o.getTitre());
-        System.out.println("editeur: " + o.getEditeur());
-        System.out.println("resume: " + o.getResume());
-        System.out.println("disponibilite: " + o.getDisponibilite());
-    } else {
-        System.out.println("Ouvrage non trouvé");
-    }
-}
 
 public static Auteur rechercheOuvrageA()
+{
+    System.out.println("Entrez le numéro de l'auteur : ");
+    int numero = Clavier.lireInt();
+
+    boolean auteurTrouve = false;
+    
+    for (Auteur auteur : Auteur.getListeAuteurs())
     {
-    Auteur a, trouve = null;
-    int numero, i=0;
-    
-    boolean rechercheParA = false;
-
-        System.out.println("Numero de l'auteur à rechercher : ");
-            numero=Clavier.lireInt();
-            if (!listeAuteurs.isEmpty()) { 
-                while ((0<listeAuteurs.size()) && (trouve==null)){
-                    a = listeAuteurs.get(i);
-                    if ((a.getNumero()==numero)){
-                          trouve = a;
-                          }
-                 }
-            }
-    return trouve;
-}
-    
-public void afficherOuvrageA() {
-    Auteur a = rechercheOuvrageA();
-    if (a != null) {
-        System.out.println("numero: " + a.getNumero()); 
-        System.out.println("nationalite: " + a.getNationalite());
-
-    } else {
-        System.out.println("Auteur non trouvé");
+        if (auteur.getNumero() == numero)
+        {
+            System.out.println("Auteur trouvé :");
+            System.out.println("Numero : " + auteur.getNumero());
+            System.out.println("Nationalité : " + auteur.getNationalite());
+             
+         return auteur;
+        }
     }
+            System.out.println("Aucun auteur trouvé avec ce numéro.");
+        return null; 
 }
 }
-
-
-  
