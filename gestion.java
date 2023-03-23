@@ -2,6 +2,7 @@ package projetjava;
 import java.util.Date;
 import java.util.ArrayList;
 
+
 /*  il reste a faire : 
 abonné : toutes les méthodes
 bibliothecaire : méthodes creerPret, retournerOuvrage, rechercherPretEnCours, rechercherPretparNumero, compterPret
@@ -18,7 +19,7 @@ public class Gestion {
     private static ArrayList<Pret> listePrets = new ArrayList<>();
     private static ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
 
-
+    
     
     public static void main(String[] args)
 {
@@ -258,7 +259,6 @@ public static void creerAbonne()
     System.out.println("Abonné créé avec succès !");
 }
 
-//revoir
 public static void creerPret() 
 {
         System.out.println("Entrez le numéro de prêt :");
@@ -272,8 +272,7 @@ public static void creerPret()
 }
 
 // méthodes à créer pour le menu bibliothécaire
-public static void retournerOuvrage()
-{
+public static void retournerOuvrage() {    
     Ouvrage o, trouve = null; 
     int numouvrage, i=0; 
 
@@ -346,7 +345,6 @@ public static void rechercherAbonneParNumero()
     }
 } 
 
-
 public static Pret rechercherPretParNumero()
 {
     System.out.println("Entrez le numéro du prêt à rechercher : ");
@@ -370,15 +368,17 @@ public static Pret rechercherPretParNumero()
         return null; 
 }
     
-public static int compterPrets() {
-    int nbPrets = 0;
-    for (Pret pret : listePrets) {
-        if (pret.getDateretour() == null) { 
-            nbPrets++; 
-        }
+public static void compterPrets() {
+   int count = 0;
+   for (Pret pret : listePrets) {
+        count++;
     }
-    return nbPrets;
-}
+    if (count == 0) {
+        System.out.println("Aucun prêt.");
+    } else {
+        System.out.println("Nombre de prêts : " + count);
+    }
+}   
 
 //méthode pour le menu admin
 public static void creerBibliothecaire()
@@ -461,25 +461,28 @@ public static void modifMdp() {
 }
 
 public static Ouvrage rechercheOuvrageNT()
+{
+    System.out.println("Entrez le numéro de l'ouvrage : ");
+    int numouvrage = Clavier.lireInt();
+
+    boolean ouvrageTrouve = false;
+    
+    for (Ouvrage ouvrage : Ouvrage.getListeOuvrage())
     {
-    Ouvrage o, trouve = null;
-    String titre;
-    int numouvrage, i=0;
-    
-    boolean rechercheParNT = false;
-    
-    System.out.println("Numero de l'ouvrage à rechercher : ");
-            numouvrage=Clavier.lireInt();
-            if (!listeOuvrages.isEmpty()) { 
-                while ((i<listeOuvrages.size()) && (trouve==null)){
-                    o = listeOuvrages.get(i);
-                    if ((o.getNumouvrage()==numouvrage)){
-                          trouve = o;
-                    }
-                    i++;
-                 }
-           }
-    return trouve;
+        if (ouvrage.getNumouvrage() == numouvrage)
+        {
+            System.out.println("Auteur trouvé :");
+            System.out.println("Numero : " + ouvrage.getNumouvrage());
+            System.out.println("Titre : " + ouvrage.getTitre());
+            System.out.println("Editeur : " + ouvrage.getEditeur());
+            System.out.println("Résumé : " + ouvrage.getResume());
+            System.out.println("Disponibilité : " + ouvrage.getDisponibilite());
+             
+         return ouvrage;
+        }
+    }
+            System.out.println("Aucun ouvrage trouvé avec ce numéro.");
+        return null; 
 }
 
 public static Auteur rechercheOuvrageA()
@@ -504,3 +507,6 @@ public static Auteur rechercheOuvrageA()
         return null; 
 }
 }
+
+
+  
