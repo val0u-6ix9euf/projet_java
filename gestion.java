@@ -2,14 +2,6 @@ package projetjava;
 import java.util.Date;
 import java.util.ArrayList;
 
-
-/*  il reste a faire : 
-abonné : toutes les méthodes
-bibliothecaire : méthodes creerPret, retournerOuvrage, rechercherPretEnCours, rechercherPretparNumero, compterPret
-admin : tout est ok
-*/
-
-
 public class Gestion {
     private static ArrayList<Abonne> listeAbonnes = new ArrayList<>();
     private static ArrayList<Bibliothecaire> listeBibliothecaires = new ArrayList<>();
