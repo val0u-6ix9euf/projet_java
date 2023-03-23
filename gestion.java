@@ -16,6 +16,8 @@ public class Gestion {
     private static ArrayList<Auteur> listeAuteurs = new ArrayList<>();
     private static ArrayList<Ouvrage> listeOuvrages = new ArrayList<>();
     private static ArrayList<Pret> listePrets = new ArrayList<>();
+    private static ArrayList<Utilisateur> listeUtilisateurs = new ArrayList<>();
+
 
     
     public static void main(String[] args)
@@ -106,7 +108,7 @@ private static Utilisateur authentif() {
         {
         case 1:
             consulterPret();
-                break;
+             break;
         case 2: 
             modifMdp();
             break;
@@ -271,10 +273,54 @@ public static void creerPret()
 
 // méthodes à créer pour le menu bibliothécaire
 public static void retournerOuvrage()
-{}
+{
+    Ouvrage o, trouve = null; 
+    int numouvrage, i=0; 
 
-public static void rechercherPretEnCours()
-{}
+    System.out.println("Numero de l'ouvrage à retourner : ");
+            numouvrage=Clavier.lireInt();
+            if (!listeOuvrages.isEmpty()) { 
+                while ((i<listeOuvrages.size()) && (trouve==null)){
+                    o = listeOuvrages.get(i);
+                    if ((o.getNumouvrage()==numouvrage)){
+                          trouve = o;
+                    }
+                    i++;
+                 }
+           }
+}
+
+public static Pret rechercherPretEnCours()
+{
+    Pret p, trouve = null;
+    int numpret, i=0;
+    boolean rechercheParnumpret = false;
+    
+    System.out.println("Numero du prêt à rechercher : ");
+            numpret=Clavier.lireInt();
+            if (!listePrets.isEmpty()) { 
+                while ((i<listePrets.size()) && (trouve==null)){
+                    p = listePrets.get(i);
+                    if ((p.getNumpret()==numpret)){
+                          trouve = p;
+                    }
+                    i++;
+                 }
+           }
+    return trouve;
+}
+        
+public void afficherPretEnCours() {
+    Pret p; 
+    p = rechercherPretEnCours();
+    if (p != null) {
+        System.out.println("numpret: " + p.getNumpret()); 
+        System.out.println("dateemprunt: " + p.getDateemprunt());
+        System.out.println("dateretour: " + p.getDateretour());
+    } else {
+        System.out.println("Pret en cours non trouvé");
+    }
+}
 public static void rechercherAbonneParNumero() 
 {
     System.out.println("Entrez le numéro de l'abonné à rechercher : ");
@@ -308,11 +354,49 @@ public static void rechercherAbonneParNumero()
 } 
 
 
-public static void rechercherPretParNumero()
-{}
+public static Pret rechercherPretParNumero()
+    {
+    Pret p, trouve = null;
+    int numpret, i=0;
+    
+    boolean rechercheParN = false;
+    
+    System.out.println("Numero du prêt à rechercher : ");
+            numpret=Clavier.lireInt();
+            if (!listePrets.isEmpty()) { 
+                while ((i<listePrets.size()) && (trouve==null)){
+                    p = listePrets.get(i);
+                    if ((p.getNumpret()==numpret)){
+                          trouve = p;
+                    }
+                    i++;
+                 }
+           }
+    return trouve;
+}
+    
+public void afficherPretParNumero() {
+    Pret p;
+    p = rechercherPretParNumero();
+    if (p != null) {
+        System.out.println("numpret: " + p.getNumpret()); 
+        System.out.println("dateemprunt: " + p.getDateemprunt());
+        System.out.println("dateretour: " + p.getDateretour());
+    } else
+        {
+        System.out.println("Pret en cours non trouvé");
+        }
+}
 
-public static void compterPrets()
-{}
+public static int compterPrets() {
+    int nbPrets = 0;
+    for (Pret pret : listePrets) {
+        if (pret.getDateretour() == null) { 
+            nbPrets++; 
+        }
+    }
+    return nbPrets;
+}
 
 //méthode pour le menu admin
 public static void creerBibliothecaire()
@@ -338,18 +422,128 @@ public static void creerBibliothecaire()
 }
 
 //méthodes pour le menu abonné
-public static void consulterPret()
-{
-}
-public static void modifMdp()
-{
+public static void consulterPret() {
+    Pret p = null, trouve = null;
+    int numpret = 0;
     
-}       
-public static void rechercheOuvrageNT()
-{}  
-public static void rechercheOuvrageA()
-{}
+    for (Pret pret : listePrets) {
+        if (pret.equals(p.getNumpret())) { 
+            numpret++;
+            System.out.println("Numéro du prêt : " + p.getNumpret());
+            System.out.println("Date d'emprunt : " + p.getDateemprunt());
+            System.out.println("Date limite de retour : " + p.getDateretour());
+        } else { 
+        }
+    }
+    
+    if (numpret == 0) {
+        System.out.println("Vous n'avez aucun prêt en cours.");
+    }
+}
 
+public static void modifMdp() {   
+    Utilisateur u, trouve = null; 
+    String ancienMdp, nouveauMdp, confirmMdp; 
+   
+    System.out.print("Entrez votre ancien mot de passe : ");
+    ancienMdp = Clavier.lireString();
+    
+    if (!listeUtilisateurs.isEmpty()) { 
+    int i = 0;
+    while ((i < listeUtilisateurs.size()) && (trouve == null)) {
+        u = listeUtilisateurs.get(i);
+        if (u.getMdp().equals(ancienMdp)) {
+            trouve = u;
+        }
+        i++;
+    }            
+    if (trouve != null) {
+            System.out.print("Entrez votre nouveau mot de passe : ");
+            nouveauMdp = Clavier.lireString();
+            
+            System.out.print("Confirmez votre nouveau mot de passe : ");
+            confirmMdp = Clavier.lireString();
+            
+            if (nouveauMdp.equals(confirmMdp)) {
+                trouve.setMdp(nouveauMdp);
+                System.out.println("Le mot de passe a été modifié avec succès.");
+            } else {
+                System.out.println("Erreur : les mots de passe ne correspondent pas.");
+            }
+        } else {
+            System.out.println("Erreur : ancien mot de passe incorrect.");
+        }
+    } else {
+    System.out.println("Erreur : aucun utilisateur enregistré.");
+    }
+}
+
+public static Ouvrage rechercheOuvrageNT()
+    {
+    Ouvrage o, trouve = null;
+    String titre;
+    int numouvrage, i=0;
+    
+    boolean rechercheParNT = false;
+    
+    System.out.println("Numero de l'ouvrage à rechercher : ");
+            numouvrage=Clavier.lireInt();
+            if (!listeOuvrages.isEmpty()) { 
+                while ((i<listeOuvrages.size()) && (trouve==null)){
+                    o = listeOuvrages.get(i);
+                    if ((o.getNumouvrage()==numouvrage)){
+                          trouve = o;
+                    }
+                    i++;
+                 }
+           }
+    return trouve;
+}
+    
+public void afficherOuvrageNT() {
+    Ouvrage o;
+    o = rechercheOuvrageNT();
+    if (o != null) {
+        System.out.println("numouvrage: " + o.getNumouvrage()); 
+        System.out.println("titre: " + o.getTitre());
+        System.out.println("editeur: " + o.getEditeur());
+        System.out.println("resume: " + o.getResume());
+        System.out.println("disponibilite: " + o.getDisponibilite());
+    } else {
+        System.out.println("Ouvrage non trouvé");
+    }
+}
+
+public static Auteur rechercheOuvrageA()
+    {
+    Auteur a, trouve = null;
+    int numero, i=0;
+    
+    boolean rechercheParA = false;
+
+        System.out.println("Numero de l'auteur à rechercher : ");
+            numero=Clavier.lireInt();
+            if (!listeAuteurs.isEmpty()) { 
+                while ((0<listeAuteurs.size()) && (trouve==null)){
+                    a = listeAuteurs.get(i);
+                    if ((a.getNumero()==numero)){
+                          trouve = a;
+                          }
+                 }
+            }
+    return trouve;
+}
+    
+public void afficherOuvrageA() {
+    Auteur a = rechercheOuvrageA();
+    if (a != null) {
+        System.out.println("numero: " + a.getNumero()); 
+        System.out.println("nationalite: " + a.getNationalite());
+
+    } else {
+        System.out.println("Auteur non trouvé");
+    }
+}
 }
 
 
